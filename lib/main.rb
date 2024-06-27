@@ -15,8 +15,18 @@ end
 
 p fibs(8)
 
-# def fibs_rec(n)
-# end
+def fibs_rec(n)
+  array = []
+  if n <2
+    array[n] = n
+    return n
+  else
+    array[n-1] = (fibs_rec(n-1) + fibs_rec(n-2))
+    return (fibs_rec(n-1) + fibs_rec(n-2))
+  end
+  array
+end
 
+p fibs_rec(8)
 # def merge_sort(array)
 # end
