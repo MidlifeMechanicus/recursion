@@ -21,38 +21,35 @@ def fibs_rec(n)
   return [0] if n == 1
   return [0, 1] if n == 2
 
+  # Calculating the value of a given entry was easy. However, I struggled to get the results into an array properly.
+  # Credit to Ganthology for this one.
+
   array = fibs_rec(n-1)
   array << array[-2] + array[-1]
 end
 
 p fibs_rec(8)
 
-# def merge_sort(full_array)
-  # if full_array.length <= 1
-    # return full_array
-  # else
-    # midpoint = full_array.length / 2
-    # left_half = full_array[0, midpoint]
-    # right_half = full_array[midpoint, -1]
-    # merge(merge_sort(left_half), merge_sort(right_half))
-  # end
-# end
-# 
-# def merge (array1, array2)
-  # merged_array = []
-  # until array1.empty? || array2.empty?
-    # if array1[0] < array2[0]
-      # merged_array << array1.shift
-    # else
-      # merged_array << arrray2.shift
-    # end
-  # end
-# end
+def merge_sort(array)
+  # This is the base case.
+  return array if array.length <= 1
 
-# This one was tough; I understood the concept, but it did not occur to me to write a separate method for the merging.
+  midpoint = array.length / 2
+  left_half = merge_sort(array[0, midpoint])
+  right_half = merge_sort(array[midpoint, array.length])
+
+  # I was alright up to this point, but I didn't think of the #empty? approach on my own. Credit to Ganthology again.
+  
+  sorted = []
+  until left_half.empty? || right_half.empty?
+    left_half.first <= right_half.first ? sorted << left_half.shift : sorted << right_half.shift
+  end
+  sorted + left_half + right_half
+end
+
 
 a = [3, 2, 1, 13, 8, 5, 0, 1]
 b = [105, 79, 100, 110] 
 
-# p merge_sort(a)
-# p merge_sort(b)
+p merge_sort(a)
+p merge_sort(b)
