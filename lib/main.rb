@@ -1,16 +1,16 @@
 def fibs(n)
   array = []
-  for i in 0..n-1
-    case i
-      when 0
-        array << 0
-      when 1
-        array << 1
-      else
-        array << array[i-1] + array[i-2]
-      end
+  for i in 0..n - 1
+    array << case i
+             when 0
+               0
+             when 1
+               1
+             else
+               (array[i - 1] + array[i - 2])
+             end
     end
-    array
+  array
 end
 
 p fibs(8)
@@ -24,8 +24,8 @@ def fibs_rec(n)
   # Calculating the value of a given entry was easy. However, I struggled to get the results into an array properly.
   # Credit to Ganthology for this one.
 
-  array = fibs_rec(n-1)
-  array << array[-2] + array[-1]
+  array = fibs_rec(n - 1)
+  array << (array[-2] + array[-1])
 end
 
 p fibs_rec(8)
@@ -39,17 +39,16 @@ def merge_sort(array)
   right_half = merge_sort(array[midpoint, array.length])
 
   # I was alright up to this point, but I didn't think of the #empty? approach on my own. Credit to Ganthology again.
-  
+
   sorted = []
   until left_half.empty? || right_half.empty?
-    left_half.first <= right_half.first ? sorted << left_half.shift : sorted << right_half.shift
+    sorted << (left_half.first <= right_half.first ? left_half.shift : right_half.shift)
   end
   sorted + left_half + right_half
 end
 
-
 a = [3, 2, 1, 13, 8, 5, 0, 1]
-b = [105, 79, 100, 110] 
+b = [105, 79, 100, 110]
 
 p merge_sort(a)
 p merge_sort(b)
